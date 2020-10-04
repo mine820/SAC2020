@@ -26,14 +26,17 @@ class DEM:
     self.y = high_y - low_y + 1
 
     # 標高データの取得
-    depth = []
+    elevation = []
     for e in self.soup.find_all('gml:tupleList'):
       for d in e.contents[0].split('\n'):
         if (len(d.split(',')) < 2):
           continue
-        depth.append(float(d.split(',')[1]))
-    self.depthArray = np.array(depth)
-    self.depthArray = np.reshape(self.depthArray, (self.x, self.y))
+        elevation.append(float(d.split(',')[1]))
+    if (len(elevation) < (self.x * self.y)):
+        for i in range(self.x*self.y-len(elevation)):
+	        elevation.append(-9999.0)
+    self.elevationArray = np.array(elevation)
+    self.elevationArray = np.reshape(self.elevationArray, (self.x, self.y))
 
   # 緯度経度の最小値／最大値の取得
   def GetArea(self):
@@ -44,5 +47,5 @@ class DEM:
     return self.x, self.y
 
   # 標高データの取得
-  def GetDepth(self):
-    return self.depthArray
+  def GetElevation(self):
+    return self.elevationArray
