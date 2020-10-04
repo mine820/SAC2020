@@ -3,14 +3,6 @@ import numpy as np
 
 # 浸水深クラス
 class DepthImage:
-  # 画像ファイル名
-  #   0x000000 浸水地域外
-  #   0xFFFFFF 0.3m未満
-  #   0x0000FF 0.3m～3.0m未満
-  #   0x00FF00 3.0m～5.0m未満
-  #   0xFF0000 5.0m～10.0m未満
-  filename = 'image_final.png'
-
   # 世界測地系（Degree形式）
   org_x = 140.59050113407473309608540925267
   org_y = 37.982445567039106145251396648045
@@ -25,9 +17,9 @@ class DepthImage:
   delta_w = 1.0672944839857651245551601423488e-4
   delta_h = 8.4511508379888268156424581005587e-5
 
-  def __init__(self):
+  def __init__(self, filename):
     # 事前に画像ファイルを読み込み
-    im = Image.open(self.filename)
+    im = Image.open(filename)
     im = im.convert('RGB')
     self.img_w = im.size[0]
     self.img_h = im.size[1]

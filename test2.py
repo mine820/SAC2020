@@ -1,6 +1,6 @@
 from dem import DEM
 
-filename = 'FG-GML-5640-55-00-DEM5A-20161001.xml'
+filename = 'dem/FG-GML-5640-55-00-DEM5A-20161001.xml'
 
 if __name__ == '__main__':
   d = DEM(filename)
